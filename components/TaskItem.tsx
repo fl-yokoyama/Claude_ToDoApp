@@ -21,8 +21,8 @@ interface TaskItemProps {
 }
 
 export default function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
-  const isOverdue =
-    task.due_date && !task.completed && task.due_date < new Date().toISOString().slice(0, 10);
+  const isOverdue: boolean =
+    !!task.due_date && !task.completed && task.due_date < new Date().toISOString().slice(0, 10);
 
   return (
     <div
