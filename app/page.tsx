@@ -52,7 +52,7 @@ export default function Home() {
   }
 
   const categories = useMemo(
-    () => [...new Set(tasks.map((t) => t.category).filter(Boolean))],
+    () => Array.from(new Set(tasks.map((t) => t.category).filter(Boolean))),
     [tasks]
   );
 
