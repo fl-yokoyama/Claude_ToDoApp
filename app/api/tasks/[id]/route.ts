@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import type { UpdateTaskInput } from "@/types/task";
 
 type Params = { params: { id: string } };
@@ -7,7 +7,7 @@ type Params = { params: { id: string } };
 export async function PATCH(request: Request, { params }: Params) {
   const body: UpdateTaskInput = await request.json();
 
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("tasks")
     .update(body)
     .eq("id", params.id)
@@ -21,7 +21,7 @@ export async function PATCH(request: Request, { params }: Params) {
 }
 
 export async function DELETE(_request: Request, { params }: Params) {
-  const { error } = await supabase
+  const { error } = await getSupabase()
     .from("tasks")
     .delete()
     .eq("id", params.id);

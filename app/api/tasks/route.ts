@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import type { CreateTaskInput } from "@/types/task";
 
 export async function GET() {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("tasks")
     .select("*")
     .order("created_at", { ascending: false });
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Title is required" }, { status: 400 });
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("tasks")
     .insert({
       title: body.title.trim(),
